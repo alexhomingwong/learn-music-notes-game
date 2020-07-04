@@ -1,10 +1,10 @@
 import React from "react";
-import { Sheet } from "./Sheet";
+import { MusicSheet } from "./MusicSheet";
 
 function App() {
   return (
     <div>
-      <Sheet></Sheet>
+      <MusicSheet />
     </div>
   );
 }
