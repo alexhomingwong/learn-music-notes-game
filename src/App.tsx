@@ -1,5 +1,5 @@
 import React from "react";
-import { MusicSheet } from "./MusicSheet";
+import { MusicSheet } from "./components/MusicSheet";
 import styled from "styled-components";
 import { treble } from "./notePostion";
 

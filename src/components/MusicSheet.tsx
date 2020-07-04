@@ -24,7 +24,10 @@ export class MusicSheet extends React.Component<IProps, IState> {
     const MAX_LINES = 10;
     for (let i = 0; i <= MAX_LINES; i++) {
       lines.push(
-        <SheetLine hide={i < MAX_LINES / 2 - 2 || i > MAX_LINES / 2 + 2} />
+        <SheetLine
+          key={i}
+          hide={i < MAX_LINES / 2 - 2 || i > MAX_LINES / 2 + 2}
+        />
       );
     }
     return lines;

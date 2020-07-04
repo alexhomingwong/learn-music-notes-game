@@ -1,4 +1,4 @@
-type Notes = "A" | "B" | "C" | "D" | "E" | "F" | "G";
+import { Notes } from "./types";
 
 export const treble: Notes[] = [
   "D",
