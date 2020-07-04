@@ -1,12 +1,8 @@
 import React from "react";
 import { MusicSheet } from "./MusicSheet";
 
-function App() {
-  return (
-    <div>
-      <MusicSheet />
-    </div>
-  );
-}
+const App = () => {
+  return <MusicSheet />;
+};
 
 export default App;

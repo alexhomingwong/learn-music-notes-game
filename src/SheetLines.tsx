@@ -25,7 +25,7 @@ const renderSheetLines = () => {
     sheetLines.push(
       <SheetLine
         key={yPosition}
-        x1="0"
+        x1="0%"
         x2="100%"
         y1={yPosition}
         y2={yPosition}
