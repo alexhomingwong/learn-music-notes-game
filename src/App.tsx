@@ -28,10 +28,10 @@ class App extends React.Component<{}, IState> {
     correct: undefined,
   };
 
-  getRandomNoteIndex = () => {
+  getRandomNoteIndex = (): number => {
     const nextNote = Math.floor(Math.random() * treble.length);
     if (nextNote === this.state.index) {
-      this.getRandomNoteIndex();
+      return this.getRandomNoteIndex();
     }
     return nextNote;
   };
@@ -60,6 +60,8 @@ class App extends React.Component<{}, IState> {
   handleScore = () => {
     if (this.isInputCorrectNote(this.state.answer)) {
       const nextNote = this.getRandomNoteIndex();
+      console.log("current note", this.state.index);
+      console.log("next note", nextNote);
       this.setState((prevState) => ({
         index: nextNote,
         correct: true,
