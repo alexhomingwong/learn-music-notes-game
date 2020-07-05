@@ -22,8 +22,6 @@ export const treble: Notes[] = [
   "B",
 ];
 
-console.log(treble.length);
-
 export const bass: Notes[] = [
   "F",
   "E",
@@ -43,5 +41,3 @@ export const bass: Notes[] = [
   "E",
   "D",
 ];
-
-console.log(bass.length);

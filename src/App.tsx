@@ -24,8 +24,7 @@ interface IState {
 
 class App extends React.Component<{}, IState> {
   state: IState = {
-    // index: Math.floor(Math.random() * treble.length),
-    index: 0,
+    index: Math.floor(Math.random() * treble.length),
     answer: "",
     streak: 0,
     correct: undefined,
@@ -33,7 +32,13 @@ class App extends React.Component<{}, IState> {
   };
 
   getRandomNoteIndex = (): number => {
-    const nextNote = Math.floor(Math.random() * treble.length);
+    let noteLength = 0;
+    if (this.state.clefType === "treble") {
+      noteLength = treble.length;
+    } else {
+      noteLength = bass.length;
+    }
+    const nextNote = Math.floor(Math.random() * noteLength);
     if (nextNote === this.state.index) {
       return this.getRandomNoteIndex();
     }
@@ -77,7 +82,12 @@ class App extends React.Component<{}, IState> {
   };
 
   switchClefType = (clefType: "treble" | "bass") => () => {
-    this.setState({ clefType });
+    this.setState({
+      clefType,
+      streak: 0,
+      correct: undefined,
+      index: this.getRandomNoteIndex(),
+    });
   };
 
   isInputCorrectNote = (answer: string) => {
