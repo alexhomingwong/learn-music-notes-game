@@ -20,10 +20,12 @@ interface IState {
   streak: number;
   correct?: boolean;
   clefType: "treble" | "bass";
+  hiScore: number;
 }
 
 class App extends React.Component<{}, IState> {
   state: IState = {
+    hiScore: 0,
     index: Math.floor(Math.random() * treble.length),
     answer: "",
     streak: 0,
@@ -69,13 +71,18 @@ class App extends React.Component<{}, IState> {
   handleScore = () => {
     if (this.isInputCorrectNote(this.state.answer)) {
       const nextNote = this.getRandomNoteIndex();
-      console.log("current note", this.state.index);
-      console.log("next note", nextNote);
-      this.setState((prevState) => ({
-        index: nextNote,
-        correct: true,
-        streak: prevState.streak + 1,
-      }));
+      this.setState(
+        (prevState) => ({
+          index: nextNote,
+          correct: true,
+          streak: prevState.streak + 1,
+        }),
+        () => {
+          if (this.state.streak > this.state.hiScore) {
+            this.setState((prevState) => ({ hiScore: prevState.streak }));
+          }
+        }
+      );
     } else {
       this.setState({ correct: false, streak: 0 });
     }
@@ -101,7 +108,7 @@ class App extends React.Component<{}, IState> {
   render = () => {
     return (
       <>
-        <Score streak={this.state.streak} />
+        <Score streak={this.state.streak} hiScore={this.state.hiScore} />
         <Message correct={this.state.correct} streak={this.state.streak} />
         <ClefToggle
           activeClef={this.state.clefType}
