@@ -43,12 +43,14 @@ export const ClefToggle = (props: IProps) => {
         <Button
           onClick={props.switchClefType("treble")}
           active={props.activeClef === "treble"}
+          disabled={props.activeClef === "treble"}
         >
           Treble
         </Button>
         <Button
           onClick={props.switchClefType("bass")}
           active={props.activeClef === "bass"}
+          disabled={props.activeClef === "bass"}
         >
           Bass
         </Button>
