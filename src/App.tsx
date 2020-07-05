@@ -33,6 +33,22 @@ class App extends React.Component<{}, IState> {
     clefType: "treble",
   };
 
+  componentDidMount = () => {
+    this.loadHiScore();
+  };
+
+  loadHiScore = () => {
+    const cookies = document.cookie.split(";");
+    cookies.forEach((cookie) => {
+      const [key, value] = cookie.split("=");
+      if (key.trim() === "learnMusic") {
+        this.setState({
+          hiScore: parseInt(value),
+        });
+      }
+    });
+  };
+
   getRandomNoteIndex = (): number => {
     let noteLength = 0;
     if (this.state.clefType === "treble") {
@@ -79,6 +95,7 @@ class App extends React.Component<{}, IState> {
         }),
         () => {
           if (this.state.streak > this.state.hiScore) {
+            document.cookie = `learnMusic=${this.state.streak}`;
             this.setState((prevState) => ({ hiScore: prevState.streak }));
           }
         }

@@ -10,6 +10,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 1rem auto 2rem;
+  padding: 0 1rem;
   align-items: flex-end;
   max-width: 1200px;
 `;
