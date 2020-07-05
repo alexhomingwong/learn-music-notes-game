@@ -10,7 +10,7 @@ const StyledSheetLine = styled.hr<ISheetLine>`
   border-bottom: 1px solid black;
   margin: 0 0 20px;
   padding: 0;
-  opacity: ${({ hide }) => (hide ? "0.3" : "1")};
+  opacity: ${({ hide }) => (hide ? "0.1" : "1")};
 `;
 
 interface IProps extends Partial<ISheetLine> {}

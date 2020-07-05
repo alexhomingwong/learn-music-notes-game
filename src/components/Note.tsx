@@ -5,7 +5,7 @@ interface IStyledNote {
   yPosition: number;
 }
 
-const StyledNote = styled.div<IProps>`
+const StyledNote = styled.div<IStyledNote>`
   height: 20px;
   width: 20px;
   border-radius: 50%;
@@ -20,5 +20,6 @@ const StyledNote = styled.div<IProps>`
 interface IProps extends Partial<IStyledNote> {}
 
 export const Note = (props: IProps) => {
-  return <StyledNote yPosition={props.yPosition} />;
+  const { yPosition = 0 } = props;
+  return <StyledNote yPosition={yPosition} />;
 };

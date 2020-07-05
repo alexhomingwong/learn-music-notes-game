@@ -3,6 +3,7 @@ import { MusicSheet } from "./components/MusicSheet";
 import styled from "styled-components";
 import { treble, notes } from "./notePostion";
 import { Input } from "./components/Input";
+import { Score } from "./components/Score";
 
 const AppContainer = styled.div`
   height: 100vh;
@@ -15,12 +16,16 @@ const AppContainer = styled.div`
 interface IState {
   index: number;
   answer: string;
+  streak: number;
+  correct?: boolean;
 }
 
 class App extends React.Component<{}, IState> {
   state = {
     index: 0,
     answer: "",
+    streak: 0,
+    correct: undefined,
   };
 
   getRandomNoteIndex = () => {
@@ -54,13 +59,14 @@ class App extends React.Component<{}, IState> {
 
   handleScore = () => {
     if (this.isInputCorrectNote(this.state.answer)) {
-      console.log("correct");
       const nextNote = this.getRandomNoteIndex();
-      this.setState({
+      this.setState((prevState) => ({
         index: nextNote,
-      });
+        correct: true,
+        streak: prevState.streak + 1,
+      }));
     } else {
-      console.log("wrong");
+      this.setState({ correct: false, streak: 0 });
     }
   };
 
@@ -69,6 +75,7 @@ class App extends React.Component<{}, IState> {
   render = () => {
     return (
       <AppContainer>
+        <Score streak={this.state.streak} correct={this.state.correct} />
         <MusicSheet index={this.state.index} />
         <Input
           checkInputToNote={this.checkInputToNote}
