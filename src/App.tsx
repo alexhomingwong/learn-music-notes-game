@@ -1,7 +1,7 @@
 import React from "react";
 import { MusicSheet } from "./components/MusicSheet";
 import styled from "styled-components";
-import { treble, notes } from "./notePostion";
+import { treble, notes, bass } from "./notePostion";
 import { Input } from "./components/Input";
 import { Score } from "./components/Score";
 import { Message } from "./components/Message";
@@ -24,7 +24,8 @@ interface IState {
 
 class App extends React.Component<{}, IState> {
   state: IState = {
-    index: Math.floor(Math.random() * treble.length),
+    // index: Math.floor(Math.random() * treble.length),
+    index: 0,
     answer: "",
     streak: 0,
     correct: undefined,
@@ -79,7 +80,13 @@ class App extends React.Component<{}, IState> {
     this.setState({ clefType });
   };
 
-  isInputCorrectNote = (answer: string) => answer === treble[this.state.index];
+  isInputCorrectNote = (answer: string) => {
+    if (this.state.clefType === "treble") {
+      return answer === treble[this.state.index];
+    } else {
+      return answer === bass[this.state.index];
+    }
+  };
 
   render = () => {
     return (
