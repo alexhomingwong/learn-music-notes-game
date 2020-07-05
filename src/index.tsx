@@ -6,6 +6,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   html{
     box-sizing: border-box;
+    font-family: 'Josefin Slab', serif;
   }
   body {
     margin: 0;

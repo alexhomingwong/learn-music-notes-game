@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { treble, notes } from "./notePostion";
 import { Input } from "./components/Input";
 import { Score } from "./components/Score";
+import { Message } from "./components/Message";
 
 const AppContainer = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@ interface IState {
 
 class App extends React.Component<{}, IState> {
   state = {
-    index: 0,
+    index: Math.floor(Math.random() * treble.length),
     answer: "",
     streak: 0,
     correct: undefined,
@@ -74,14 +74,17 @@ class App extends React.Component<{}, IState> {
 
   render = () => {
     return (
-      <AppContainer>
-        <Score streak={this.state.streak} correct={this.state.correct} />
-        <MusicSheet index={this.state.index} />
-        <Input
-          checkInputToNote={this.checkInputToNote}
-          answer={this.state.answer}
-        />
-      </AppContainer>
+      <>
+        <Score streak={this.state.streak} />
+        <Message correct={this.state.correct} streak={this.state.streak} />
+        <AppContainer>
+          <MusicSheet index={this.state.index} />
+          <Input
+            checkInputToNote={this.checkInputToNote}
+            answer={this.state.answer}
+          />
+        </AppContainer>
+      </>
     );
   };
 }
