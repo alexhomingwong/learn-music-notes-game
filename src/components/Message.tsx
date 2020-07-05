@@ -40,7 +40,7 @@ export const Message = (props: IProps) => {
   return (
     <StyledMessage>
       {props.correct === undefined
-        ? "How well can you read music?"
+        ? ""
         : props.correct
         ? getMessageStreak()
         : FailedMessages[Math.floor(Math.random() * FailedMessages.length)]}

@@ -2,7 +2,8 @@ import React from "react";
 import { MusicSheet } from "./components/MusicSheet";
 import styled from "styled-components";
 import { treble, notes, bass } from "./notePostion";
-import { Input } from "./components/Input";
+import { Title } from "./components/Title";
+import { Instructions } from "./components/Instructions";
 import { Score } from "./components/Score";
 import { Message } from "./components/Message";
 import { ClefToggle } from "./components/ClefToggle";
@@ -32,6 +33,16 @@ class App extends React.Component<{}, IState> {
     correct: undefined,
     clefType: "treble",
   };
+
+  constructor(props: {}) {
+    super(props);
+    document.onkeydown = (event) => {
+      const upperKey = event.key?.toLocaleUpperCase("en");
+      if (notes.includes(upperKey)) {
+        this.checkInputToNote(upperKey);
+      }
+    };
+  }
 
   componentDidMount = () => {
     this.loadHiScore();
@@ -70,14 +81,11 @@ class App extends React.Component<{}, IState> {
     return false;
   };
 
-  checkInputToNote = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue =
-      event.currentTarget.value[event.currentTarget.value.length - 1];
-
-    if (this.isInputValidNote(inputValue)) {
+  checkInputToNote = (key: string) => {
+    if (this.isInputValidNote(key)) {
       this.setState(
         {
-          answer: inputValue.toLocaleUpperCase("en"),
+          answer: key,
         },
         this.handleScore
       );
@@ -126,18 +134,16 @@ class App extends React.Component<{}, IState> {
     return (
       <>
         <Score streak={this.state.streak} hiScore={this.state.hiScore} />
-        <Message correct={this.state.correct} streak={this.state.streak} />
+        <Title />
         <ClefToggle
           activeClef={this.state.clefType}
           switchClefType={this.switchClefType}
         />
         <AppContainer>
           <MusicSheet clefType={this.state.clefType} index={this.state.index} />
-          <Input
-            checkInputToNote={this.checkInputToNote}
-            answer={this.state.answer}
-          />
         </AppContainer>
+        <Instructions />
+        <Message correct={this.state.correct} streak={this.state.streak} />
       </>
     );
   };

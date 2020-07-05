@@ -7,8 +7,7 @@ import Bass from "../assets/icons/bassClef.svg";
 
 const StyledMusicSheet = styled.div`
   width: 60%;
-  margin: 1rem;
-  padding: 0 1rem;
+  margin: 0.5rem 1rem;
   position: relative;
 `;
 
