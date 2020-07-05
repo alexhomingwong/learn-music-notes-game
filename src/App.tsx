@@ -5,6 +5,7 @@ import { treble, notes } from "./notePostion";
 import { Input } from "./components/Input";
 import { Score } from "./components/Score";
 import { Message } from "./components/Message";
+import { ClefToggle } from "./components/ClefToggle";
 
 const AppContainer = styled.div`
   display: flex;
@@ -18,14 +19,16 @@ interface IState {
   answer: string;
   streak: number;
   correct?: boolean;
+  clefType: "treble" | "bass";
 }
 
 class App extends React.Component<{}, IState> {
-  state = {
+  state: IState = {
     index: Math.floor(Math.random() * treble.length),
     answer: "",
     streak: 0,
     correct: undefined,
+    clefType: "treble",
   };
 
   getRandomNoteIndex = (): number => {
@@ -72,6 +75,10 @@ class App extends React.Component<{}, IState> {
     }
   };
 
+  switchClefType = (clefType: "treble" | "bass") => () => {
+    this.setState({ clefType });
+  };
+
   isInputCorrectNote = (answer: string) => answer === treble[this.state.index];
 
   render = () => {
@@ -79,8 +86,12 @@ class App extends React.Component<{}, IState> {
       <>
         <Score streak={this.state.streak} />
         <Message correct={this.state.correct} streak={this.state.streak} />
+        <ClefToggle
+          activeClef={this.state.clefType}
+          switchClefType={this.switchClefType}
+        />
         <AppContainer>
-          <MusicSheet index={this.state.index} />
+          <MusicSheet clefType={this.state.clefType} index={this.state.index} />
           <Input
             checkInputToNote={this.checkInputToNote}
             answer={this.state.answer}

@@ -2,16 +2,39 @@ import React from "react";
 import styled from "styled-components";
 import { SheetLine } from "./SheetLine";
 import { Note } from "./Note";
+import Treble from "../assets/icons/trebleClef.svg";
+import Bass from "../assets/icons/bassClef.svg";
 
 const StyledMusicSheet = styled.div`
-  width: 100%;
+  width: 60%;
   margin: 1rem;
   padding: 0 1rem;
   position: relative;
 `;
 
+const TrebleClef = styled.img`
+  width: 100%;
+`;
+
+const BassClef = styled.img`
+  width: 60%;
+  margin-bottom: 20px;
+`;
+
+const ImageWrapper = styled.div`
+  top: 50%;
+  width: 100px;
+  transform: translateY(-50%);
+  left: 20%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 interface IProps {
   index: number;
+  clefType: "treble" | "bass";
 }
 interface IState {
   gapHeight: number;
@@ -37,6 +60,13 @@ export class MusicSheet extends React.Component<IProps, IState> {
   render = () => {
     return (
       <StyledMusicSheet>
+        <ImageWrapper>
+          {this.props.clefType === "treble" ? (
+            <TrebleClef src={Treble} />
+          ) : (
+            <BassClef src={Bass} />
+          )}
+        </ImageWrapper>
         {this.renderLines()}
         <Note yPosition={this.intervals * this.props.index} />
       </StyledMusicSheet>
