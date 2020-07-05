@@ -6,6 +6,7 @@ import { Note } from "./Note";
 const StyledMusicSheet = styled.div`
   width: 100%;
   margin: 1rem;
+  padding: 0 1rem;
   position: relative;
 `;
 
