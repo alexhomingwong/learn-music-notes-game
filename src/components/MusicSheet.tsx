@@ -50,7 +50,9 @@ export class MusicSheet extends React.Component<IProps, IState> {
       lines.push(
         <SheetLine
           key={i}
-          hide={i < MAX_LINES / 2 - 2 || i > MAX_LINES / 2 + 2}
+          lineIndex={i}
+          noteIndex={this.props.index}
+          defaultLines={i <= MAX_LINES / 2 + 2 && i >= MAX_LINES / 2 - 2}
         />
       );
     }
