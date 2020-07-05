@@ -8,7 +8,7 @@ interface IProps {
 const Container = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin: 1rem;
+  margin: 1rem 1rem 2rem;
   align-items: flex-end;
   max-width: 1200px;
 `;

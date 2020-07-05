@@ -4,7 +4,7 @@ import styled from "styled-components";
 const StyledMessage = styled.div`
   text-align: center;
   font-size: 3rem;
-  white-space: pre;
+  margin-bottom: 1rem;
 `;
 
 interface IProps {
@@ -40,7 +40,7 @@ export const Message = (props: IProps) => {
   return (
     <StyledMessage>
       {props.correct === undefined
-        ? " "
+        ? "How well can you read music?"
         : props.correct
         ? getMessageStreak()
         : FailedMessages[Math.floor(Math.random() * FailedMessages.length)]}
